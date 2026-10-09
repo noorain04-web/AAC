@@ -1,0 +1,11 @@
+{
+  "name": "HearLink AAC — Adult Aphasia",
+  "short_name": "HearLink AAC",
+  "description": "Context-based Hindi/English communication support for adults with aphasia.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#075985",
+  "icons": []
+}
