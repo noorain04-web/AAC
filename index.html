@@ -1,76 +1,421 @@
 <!doctype html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#075985"><meta name="description" content="Context-based AAC communication support for adults with aphasia">
-<title>HearLink AAC — Adult Aphasia</title><link rel="manifest" href="./manifest.json">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075985">
+<meta name="description" content="Adaptable Hindi and English AAC support for adults with aphasia">
+<title>HearLink AAC — Adult Aphasia</title>
+<link rel="manifest" href="./manifest.json">
 <style>
-:root{--blue:#075985;--pale:#e0f2fe;--bg:#f4f7fb;--ink:#172033;--line:#d6e0eb;--red:#b42318}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif}
+:root{--blue:#075985;--pale:#e0f2fe;--bg:#f4f7fb;--ink:#172033;--line:#d6e0eb;--red:#b42318;--green:#166534}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
 button,input,textarea,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:4px solid #f59e0b;outline-offset:2px}
-header{background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:2}
+header{background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
 .brand{font-weight:850;color:var(--blue);font-size:1.25rem}.muted{color:#526176;font-size:.85rem}.controls,.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;min-height:44px;font-weight:700;color:var(--ink)}.btn.primary{background:var(--blue);border-color:var(--blue);color:white}.btn.active{background:var(--pale);border-color:var(--blue);color:var(--blue)}.btn.danger{color:var(--red);background:#fff0ee}
-main{max-width:1050px;margin:auto;padding:12px;display:grid;gap:12px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:14px}.urgent{background:#fff5f4;border:2px solid #e8a5a0}
+.btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;min-height:44px;font-weight:700;color:var(--ink)}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.active{background:var(--pale);border-color:var(--blue);color:var(--blue)}.btn.danger{color:var(--red);background:#fff0ee}.btn:disabled{opacity:.45;cursor:not-allowed}
+main{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.urgent{background:#fff5f4;border:2px solid #e8a5a0}
 h2{font-size:1.08rem;margin:0 0 10px}.head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.tile{background:white;border:2px solid var(--line);border-radius:14px;min-height:100px;padding:8px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;font-weight:750;overflow-wrap:anywhere}.tile .emoji{font-size:2rem;line-height:1.1}.tile small{font-size:.75rem;color:#526176;font-weight:600}.urgent .tile{border-color:#e8a5a0}
-textarea,input,select{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px;background:white;color:var(--ink)}textarea{min-height:78px;resize:vertical}
-label{display:grid;gap:6px;font-size:.9rem;font-weight:700}.sentence{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.chip{background:var(--pale);border:1px solid #7dd3fc;border-radius:10px;padding:7px;display:flex;gap:7px;align-items:center}.chip button{border:0;background:transparent;color:#991b1b;font-weight:900}
-.settings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.status{min-height:1.4em;color:#526176;font-size:.85rem}.hidden{display:none!important}
-footer{max-width:1050px;margin:auto;padding:0 16px 22px;color:#526176;font-size:.8rem}
-@media(max-width:650px){body{font-size:17px}main{padding:9px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tile{min-height:94px}.settings{grid-template-columns:1fr}.brand{font-size:1.1rem}}
-</style></head>
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.tile{background:#fff;border:2px solid var(--line);border-radius:14px;min-height:100px;padding:8px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;font-weight:750;overflow-wrap:anywhere}.tile .emoji{font-size:2rem;line-height:1.1}.tile small{font-size:.75rem;color:#526176;font-weight:600}.urgent .tile{border-color:#e8a5a0}
+textarea,input,select{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}textarea{min-height:94px;resize:vertical}
+label{display:grid;gap:6px;font-size:.9rem;font-weight:700}.sentence{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0;min-height:16px}.chip{background:var(--pale);border:1px solid #7dd3fc;border-radius:10px;padding:7px;display:flex;gap:7px;align-items:center;max-width:100%;overflow-wrap:anywhere}.chip button{border:0;background:transparent;color:#991b1b;font-weight:900;padding:0 4px}
+.settings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.status{min-height:1.4em;color:#526176;font-size:.85rem}.hidden{display:none!important}.mode-note{background:#f0f9ff;border-radius:10px;padding:10px;margin:8px 0;font-size:.9rem}
+.builder-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.builder-grid .btn{white-space:normal}
+.personal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.saved-wrap{display:grid;gap:6px}.saved-wrap .tile{width:100%}.saved-actions{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+footer{max-width:1100px;margin:auto;padding:0 16px 22px;color:#526176;font-size:.8rem}
+@media(max-width:680px){body{font-size:17px}main{padding:9px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tile{min-height:94px}.settings,.personal-grid{grid-template-columns:1fr}.brand{font-size:1.1rem}.builder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
 <body>
-<header><div><div class="brand">HearLink AAC</div><div class="muted" id="subtitle">वयस्क अफ़ेसिया • संदर्भ के अनुसार बातचीत</div></div>
-<div class="controls"><button class="btn active" id="basic">सरल / Basic</button><button class="btn" id="advanced">बातचीत / Conversation</button><button class="btn" id="lang">हिंदी / English</button></div></header>
+<header>
+  <div><div class="brand">HearLink AAC</div><div class="muted" id="subtitle">वयस्क अफ़ेसिया • संवाद के लिए सहायक</div></div>
+  <div class="controls">
+    <button class="btn active" id="quickMode" type="button">त्वरित संदेश / Quick</button>
+    <button class="btn" id="conversationMode" type="button">बातचीत बनाएँ / Build</button>
+    <button class="btn" id="languageToggle" type="button">हिंदी / English</button>
+    <button class="btn" id="openSettings" type="button">⚙ पसंद / Profile</button>
+  </div>
+</header>
 <main>
-<section class="panel urgent"><div class="head"><h2 id="urgentTitle">ज़रूरी / दर्द • Urgent & Pain</h2><span class="muted">Important messages stay at the top</span></div><div class="grid" id="urgentGrid"></div></section>
-<section class="panel"><div class="head"><h2 id="categoryTitle">मुझे किस बारे में बात करनी है? / Choose a situation</h2></div><div class="grid" id="categories"></div></section>
-<section class="panel"><div class="head"><h2 id="itemsTitle">घर पर / At home</h2><div class="actions"><button class="btn" id="prev">← वापस / Back</button><button class="btn" id="next">अगले / More</button></div></div><div class="grid" id="items"></div><p class="muted" id="help">कार्ड दबाएँ। बातचीत मोड में कार्ड संदेश में जुड़ेंगे।</p></section>
-<section class="panel"><div class="head"><h2 id="messageTitle">मेरा संदेश / My message</h2><span class="muted" id="modeHint">Basic: tap a card to speak.</span></div>
-<div id="phraseArea" class="hidden"><div class="sentence" id="phrase"></div><div class="actions"><button class="btn primary" id="speakPhrase">🔊 पूरा संदेश बोलें</button><button class="btn" id="undo">एक शब्द हटाएँ</button><button class="btn danger" id="clear">साफ़ करें</button></div></div>
-<label id="messageLabel">अपना संदेश लिखें / Type or edit a message<textarea id="message" placeholder="यहाँ संदेश लिखें…"></textarea></label>
-<div class="actions" style="margin-top:9px"><button class="btn primary" id="speakText">🔊 बोलें / Speak</button><button class="btn" id="addText">वाक्य में जोड़ें / Add to message</button><button class="btn" id="stop">■ रोकें / Stop</button></div><p class="status" id="status" role="status" aria-live="polite">तैयार। Speech depends on the voice installed on this device.</p></section>
-<section class="panel"><h2 id="settingsTitle">आवाज़ और पसंद / Voice & preferences</h2><div class="settings">
-<label id="voiceLabel">बोलने की आवाज़ / Speech voice<select id="voice"><option value="">System default</option></select></label>
-<label id="rateLabel">बोलने की गति / Speech speed<input id="rate" type="range" min=".65" max="1.1" value=".82" step=".05"></label>
-<label id="saveLabel">संदेश का नाम / Saved message name<input id="saveName" placeholder="e.g. Call my daughter"></label><div style="align-self:end"><button class="btn" id="save">★ संदेश सहेजें / Save</button></div></div>
-<h2 style="margin-top:15px" id="savedTitle">मेरे सहेजे संदेश / Saved messages</h2><div class="grid" id="saved"></div></section>
+<section class="panel urgent" aria-labelledby="urgentTitle">
+  <div class="head"><h2 id="urgentTitle">ज़रूरी संदेश / Essential messages</h2><span class="muted" id="urgentNote">हमेशा उपलब्ध • Always available</span></div>
+  <div class="grid" id="urgentGrid"></div>
+</section>
+
+<section class="panel" id="profileBanner">
+  <div class="head"><h2 id="welcomeTitle">आज आप क्या कहना चाहेंगे?</h2><span class="muted" id="pathHint">अपनी सुविधा के अनुसार मोड चुनें</span></div>
+  <div class="mode-note" id="modeDescription">त्वरित मोड में कार्ड दबाते ही संदेश बोलेगा। बातचीत मोड में संदेश बनाकर उसे जाँच और बदल सकते हैं।</div>
+  <div class="actions">
+    <button class="btn active" id="largeTextToggle" type="button">A+ बड़ा पाठ / Larger text</button>
+    <button class="btn" id="clearMessageTop" type="button">संदेश साफ़ करें / Clear message</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="head"><h2 id="categoryTitle">विषय चुनें / Choose a topic</h2></div>
+  <div class="grid" id="categories"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><h2 id="itemsTitle">घर पर / At home</h2><div class="actions"><button class="btn" id="prev" type="button">← वापस / Back</button><button class="btn" id="next" type="button">अगले / More</button></div></div>
+  <div class="grid" id="items"></div>
+  <p class="muted" id="itemsHelp">त्वरित मोड में कार्ड संदेश बोलेगा। बातचीत मोड में कार्ड आपके संदेश में जुड़ता है।</p>
+</section>
+
+<section class="panel" id="messagePanel">
+  <div class="head"><h2 id="messageTitle">मेरा संदेश / My message</h2><span class="muted" id="modeHint">कार्ड दबाते ही बोलें / Tap to speak</span></div>
+  <div id="builderHelp" class="mode-note hidden">अपने विचार से मिलते-जुलते शब्द या वाक्य चुनें। बोलने से पहले संदेश पढ़ें/जाँचें और ज़रूरत के अनुसार संपादित करें।</div>
+  <div id="builder" class="hidden">
+    <h3 id="starterTitle" style="font-size:1rem;margin:10px 0 6px">वाक्य शुरू करें / Start with</h3>
+    <div class="builder-grid" id="starters"></div>
+    <h3 id="connectTitle" style="font-size:1rem;margin:12px 0 6px">जोड़ने वाले शब्द / Add meaning</h3>
+    <div class="builder-grid" id="connectors"></div>
+    <div class="sentence" id="phrase" aria-label="Message components"></div>
+    <div class="actions"><button class="btn" id="undo" type="button">आख़िरी हिस्सा हटाएँ / Undo</button><button class="btn danger" id="clearBuilder" type="button">सब हटाएँ / Clear all</button></div>
+  </div>
+  <label id="messageLabel">संदेश संपादित करें / Edit message
+    <textarea id="message" placeholder="अपना संदेश यहाँ लिखें…" autocomplete="off"></textarea>
+  </label>
+  <div class="actions" style="margin-top:9px">
+    <button class="btn primary" id="speakText" type="button">🔊 बोलें / Speak message</button>
+    <button class="btn" id="addText" type="button">वाक्य में जोड़ें / Add typed text</button>
+    <button class="btn" id="stop" type="button">■ रोकें / Stop speech</button>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite">तैयार। आवाज़ डिवाइस पर उपलब्ध होनी चाहिए। / Ready. A device voice is required.</p>
+</section>
+
+<section class="panel">
+  <h2 id="savedTitle">सहेजे हुए व्यक्तिगत संदेश / Personal saved messages</h2>
+  <div class="personal-grid">
+    <label id="saveNameLabel">संदेश का नाम / Message label<input id="saveName" placeholder="e.g. My usual lunch"></label>
+    <div style="align-self:end"><button class="btn" id="save" type="button">★ संदेश सहेजें / Save message</button></div>
+  </div>
+  <p class="muted" id="savedNote">सहेजे संदेश केवल इसी डिवाइस के ब्राउज़र में रहेंगे। / Saved messages stay in this browser on this device.</p>
+  <div class="grid" id="saved"></div>
+</section>
+
+<section class="panel hidden" id="profilePanel">
+  <div class="head"><h2 id="profileTitle">व्यक्तिगत सेटिंग / Personal profile</h2><button class="btn" id="closeSettings" type="button">बंद करें / Close</button></div>
+  <p class="muted" id="profileIntro">इन्हें व्यक्ति और उसके परिवार/स्पीच-लैंग्वेज थेरपिस्ट के साथ मिलकर चुनें।</p>
+  <div class="settings">
+    <label id="voiceLabel">आवाज़ / Speech voice<select id="voice"><option value="">डिवाइस की डिफ़ॉल्ट आवाज़ / System default</option></select></label>
+    <label id="rateLabel">बोलने की गति / Speech rate<input id="rate" type="range" min="0.65" max="1.1" value="0.82" step="0.05"></label>
+    <label id="startModeLabel">ऐप खुलते समय / Default mode<select id="startMode"><option value="quick">Quick messages</option><option value="build">Conversation builder</option></select></label>
+    <label id="displayLabel">कार्डों का आकार / Button size<select id="buttonSize"><option value="regular">Regular</option><option value="large">Large</option><option value="xlarge">Extra large</option></select></label>
+  </div>
+  <h3 id="personalVocabTitle" style="font-size:1rem;margin:16px 0 8px">अपने व्यक्तिगत कार्ड जोड़ें / Add personal cards</h3>
+  <div class="settings">
+    <label id="personalLabelLabel">कार्ड पर लिखा नाम / Card label<input id="personalLabel" placeholder="e.g. My daughter"></label>
+    <label id="personalMessageLabel">पूरा संदेश / Message spoken<input id="personalMessage" placeholder="e.g. Please call Riya"></label>
+    <label id="personalEmojiLabel">प्रतीक / Emoji (optional)<input id="personalEmoji" maxlength="8" placeholder="👩"></label>
+    <div style="align-self:end"><button class="btn" id="addPersonal" type="button">+ कार्ड जोड़ें / Add card</button></div>
+  </div>
+  <div class="grid" id="personalCards" style="margin-top:10px"></div>
+  <p class="muted" id="profilePrivacy">प्रोफ़ाइल और कार्ड इसी डिवाइस पर सहेजे जाते हैं। निजी जानकारी साझा न करें।</p>
+</section>
 </main>
-<footer><p><strong>Safety:</strong> This is a communication aid, not a diagnostic or treatment tool. It does not call emergency services or contact caregivers. Set it up and test it with the user, family and speech-language therapist; keep another way to request urgent help.</p><p>Privacy: saved messages stay in this browser on this device. No account or server is used.</p></footer>
+<footer>
+  <p><strong id="safetyTitle">सुरक्षा / Safety:</strong> <span id="safetyText">यह संचार में मदद करने वाला प्रोटोटाइप है, निदान या उपचार का विकल्प नहीं। यह आपातकालीन सेवा या परिवार को अपने-आप फोन नहीं करता। आपातकाल के लिए दूसरा तरीका भी रखें। / This is a communication aid prototype, not a diagnostic or treatment tool. It does not call emergency services or caregivers.</span></p>
+  <p id="clinicalNote">इसकी शब्दावली और प्रतीक प्रत्येक व्यक्ति के साथ जाँचे और वैयक्तिकृत करें। इसे clinical effectiveness के रूप में तब तक प्रस्तुत न करें जब तक user testing और उचित मूल्यांकन न हो।</p>
+</footer>
+
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);let lang='hi',mode='basic',category='home',page=0,phrase=[],voices=[];
-const urgent=[['🆘','मुझे मदद चाहिए','I need help'],['😣','मुझे दर्द है','I am in pain'],['🚻','मुझे शौचालय जाना है','I need the toilet'],['💧','मुझे पानी चाहिए','I need water'],['🛑','रुकिए','Stop, please'],['🗣️','मुझे समय दें','Please give me time'],['📞','किसी को बुलाइए','Please call someone'],['❤️','मैं ठीक नहीं हूँ','I do not feel well']];
-const cats=[['home','🏠','घर पर','At home'],['food','🍽️','खाना-पीना','Food & drink'],['care','🧼','व्यक्तिगत देखभाल','Personal care'],['people','👥','लोग और बातचीत','People & conversation'],['feelings','💙','भावनाएँ','Feelings'],['health','🩺','स्वास्थ्य','Health'],['places','🚗','बाहर जाना','Places & travel'],['choices','✅','हाँ / नहीं / चुनाव','Yes / no / choices']];
+const $=id=>document.getElementById(id);
+const STORAGE={saved:'hearlinkAacSavedV2',profile:'hearlinkAacProfileV2',personal:'hearlinkAacPersonalV2'};
+let lang='hi',mode='quick',category='home',page=0,voices=[],phrase=[],largeText=false;
+
+const urgent=[
+ ['🆘','मुझे मदद चाहिए','I need help'],
+ ['🛑','रुकिए, कृपया','Stop, please'],
+ ['✅','हाँ','Yes'],
+ ['❌','नहीं','No'],
+ ['😣','मुझे दर्द है','I am in pain'],
+ ['🚻','मुझे शौचालय जाना है','I need the toilet'],
+ ['💧','मुझे पानी चाहिए','I need water'],
+ ['⏳','मुझे समय दें','Please give me time'],
+ ['🔁','फिर से कहिए','Please say that again'],
+ ['📞','मेरे परिवार को बुलाइए','Please call my family']
+];
+const cats=[
+ ['home','🏠','घर पर','At home'],['food','🍽️','खाना-पीना','Food & drink'],['care','🧼','व्यक्तिगत देखभाल','Personal care'],
+ ['people','👥','लोग और बातचीत','People & conversation'],['feelings','💙','भावनाएँ','Feelings'],['health','🩺','स्वास्थ्य','Health'],
+ ['places','🚗','बाहर जाना','Places & travel'],['choices','✅','हाँ / नहीं / चुनाव','Yes / no / choices'],
+ ['social','💬','विचार और सामाजिक बातें','Social & opinions'],['personal','⭐','मेरे व्यक्तिगत कार्ड','My personal cards']
+];
 const data={
-home:[['🛋️','मुझे बैठना है','I want to sit'],['🛏️','मुझे लेटना है','I want to lie down'],['💡','लाइट चालू करें','Turn on the light'],['🌡️','बहुत गर्मी है','I feel hot'],['🥶','मुझे ठंड लग रही है','I feel cold'],['🪟','खिड़की खोलें','Open the window'],['🔇','आवाज़ कम करें','Lower the noise'],['🧍','मेरे साथ रहिए','Please stay with me'],['📺','टीवी चालू करें','Turn on the TV'],['🔑','मेरी चाबी कहाँ है?','Where are my keys?'],['🙏','धन्यवाद','Thank you']],
-food:[['💧','पानी','Water'],['☕','चाय','Tea'],['🥛','दूध','Milk'],['🍚','चावल','Rice'],['🍞','रोटी / ब्रेड','Roti / bread'],['🍲','खाना','Food / meal'],['🍎','फल','Fruit'],['🥄','चम्मच चाहिए','I need a spoon'],['😋','मुझे पसंद है','I like it'],['🙅','मुझे यह नहीं चाहिए','I do not want this'],['🔥','खाना गर्म है','The food is hot'],['🤢','मुझे उल्टी जैसा लग रहा है','I feel nauseated']],
-care:[['🚿','मुझे नहाना है','I want to bathe'],['🪥','दाँत साफ़ करने हैं','Brush my teeth'],['🧴','क्रीम चाहिए','I need cream'],['👕','कपड़े बदलने हैं','Change my clothes'],['🪮','कंघी चाहिए','I need a comb'],['🧻','टिश्यू चाहिए','I need a tissue'],['🧼','साबुन चाहिए','I need soap'],['🚽','शौचालय कहाँ है?','Where is the toilet?'],['🤝','मदद करके तैयार कर दें','Help me get ready']],
-people:[['👋','नमस्ते','Hello'],['🙏','धन्यवाद','Thank you'],['❤️','मैं आपसे प्यार करता/करती हूँ','I love you'],['💬','मुझसे धीरे बोलें','Please speak slowly'],['⏳','मुझे समय दें','Please give me time'],['🔁','फिर से कहिए','Please say that again'],['❓','मुझे समझ नहीं आया','I did not understand'],['✍️','लिखकर बताइए','Please write it down'],['📱','मुझे फोन करना है','I want to make a phone call'],['🙋','मेरी बात सुनिए','Please listen to me'],['👨‍👩‍👧','मेरे परिवार को बुलाइए','Call my family']],
-feelings:[['🙂','मैं खुश हूँ','I am happy'],['😔','मैं उदास हूँ','I feel sad'],['😟','मैं चिंतित हूँ','I am worried'],['😠','मैं नाराज़ हूँ','I am angry'],['😴','मुझे नींद आ रही है','I am sleepy'],['😫','मैं थक गया/गई हूँ','I am tired'],['😌','मैं आराम करना चाहता/चाहती हूँ','I want to rest'],['😕','मैं उलझन में हूँ','I am confused'],['👍','ठीक है','Okay'],['👎','ठीक नहीं है','Not okay']],
-health:[['💊','दवा का समय है','Time for medicine'],['👨‍⚕️','मुझे डॉक्टर से बात करनी है','I need to speak to a doctor'],['🩹','मुझे चोट लगी है','I am injured'],['🤕','मेरे सिर में दर्द है','I have a headache'],['😮‍💨','साँस लेने में परेशानी है','I am having trouble breathing'],['🤒','मुझे बुखार है','I have a fever'],['🩺','मेरा चेकअप चाहिए','I need a check-up'],['👂','मुझे सुनने में कठिनाई है','I have difficulty hearing'],['🗣️','बोलने में कठिनाई है','I have difficulty speaking'],['🚑','मुझे तुरंत चिकित्सा मदद चाहिए','I need urgent medical help']],
-places:[['🏥','अस्पताल जाना है','I need to go to hospital'],['🏠','घर चलें','Let us go home'],['🚗','गाड़ी चाहिए','I need a car'],['🛒','दुकान जाना है','I want to go to the shop'],['🌳','बाहर जाना है','I want to go outside'],['🚶','चलने में मदद करें','Please help me walk'],['🪑','बैठने की जगह चाहिए','I need somewhere to sit'],['🧭','हम कहाँ हैं?','Where are we?'],['🚪','दरवाज़ा खोलें','Open the door'],['🚌','बस चाहिए','I need the bus']],
-choices:[['✅','हाँ','Yes'],['❌','नहीं','No'],['🤷','पता नहीं','I do not know'],['👌','शायद','Maybe'],['⏸️','अभी नहीं','Not now'],['🔄','फिर से कोशिश करें','Try again'],['1️⃣','पहला विकल्प','First option'],['2️⃣','दूसरा विकल्प','Second option'],['⭐','मुझे यह पसंद है','I like this'],['🚫','मुझे यह पसंद नहीं','I do not like this'],['❓','कृपया समझाएँ','Please explain'],['🕒','बाद में','Later']]
+home:[
+ ['🛋️','मुझे बैठना है','I want to sit'],['🛏️','मुझे लेटना है','I want to lie down'],['💡','लाइट चालू करें','Turn on the light'],
+ ['🌡️','बहुत गर्मी है','I feel hot'],['🥶','मुझे ठंड लग रही है','I feel cold'],['🪟','खिड़की खोलें','Open the window'],
+ ['🔇','आवाज़ कम करें','Lower the noise'],['🧍','मेरे साथ रहिए','Please stay with me'],['📺','टीवी चालू करें','Turn on the TV'],
+ ['🔑','मेरी चाबी कहाँ है?','Where are my keys?'],['🙏','धन्यवाद','Thank you']
+],
+food:[
+ ['💧','पानी','Water'],['☕','चाय','Tea'],['🥛','दूध','Milk'],['🍚','चावल','Rice'],['🍞','रोटी / ब्रेड','Roti / bread'],
+ ['🍲','खाना','Food / meal'],['🍎','फल','Fruit'],['🥄','चम्मच चाहिए','I need a spoon'],['😋','मुझे पसंद है','I like it'],
+ ['🙅','मुझे यह नहीं चाहिए','I do not want this'],['🔥','खाना गर्म है','The food is hot'],['🤢','मुझे उल्टी जैसा लग रहा है','I feel nauseated']
+],
+care:[
+ ['🚿','मुझे नहाना है','I want to bathe'],['🪥','दाँत साफ़ करने हैं','Brush my teeth'],['🧴','क्रीम चाहिए','I need cream'],
+ ['👕','कपड़े बदलने हैं','Change my clothes'],['🪮','कंघी चाहिए','I need a comb'],['🧻','टिश्यू चाहिए','I need a tissue'],
+ ['🧼','साबुन चाहिए','I need soap'],['🚽','शौचालय कहाँ है?','Where is the toilet?'],['🤝','मुझे तैयार होने में मदद करें','Help me get ready']
+],
+people:[
+ ['👋','नमस्ते','Hello'],['🙏','धन्यवाद','Thank you'],['❤️','मैं आपसे प्यार करता/करती हूँ','I love you'],
+ ['💬','मुझसे धीरे बोलें','Please speak slowly'],['⏳','मुझे समय दें','Please give me time'],['🔁','फिर से कहिए','Please say that again'],
+ ['❓','मुझे समझ नहीं आया','I did not understand'],['✍️','लिखकर बताइए','Please write it down'],['📱','मुझे फोन करना है','I want to make a phone call'],
+ ['🙋','मेरी बात सुनिए','Please listen to me'],['👨‍👩‍👧','मेरे परिवार को बुलाइए','Call my family'],
+ ['🧠','मुझे शब्द ढूँढने में समय लगता है','I need time to find my words'],
+ ['🗣️','यह मेरी बात नहीं है','That is not what I mean'],['💡','मुझे कुछ कहना है','I want to tell you something'],
+ ['❓','आप क्या सोचते हैं?','What do you think?'],['📝','मुझे समझाने दीजिए','Let me explain']
+],
+feelings:[
+ ['🙂','मैं खुश हूँ','I am happy'],['😔','मैं उदास हूँ','I feel sad'],['😟','मैं चिंतित हूँ','I am worried'],['😠','मैं नाराज़ हूँ','I am angry'],
+ ['😴','मुझे नींद आ रही है','I am sleepy'],['😫','मैं थक गया/गई हूँ','I am tired'],['😌','मैं आराम करना चाहता/चाहती हूँ','I want to rest'],
+ ['😕','मैं उलझन में हूँ','I am confused'],['👍','ठीक है','Okay'],['👎','ठीक नहीं है','Not okay'],['😊','मैं उत्साहित हूँ','I am excited'],
+ ['😳','मुझे शर्मिंदगी हो रही है','I feel embarrassed'],['🥺','मैं परेशान हूँ','I am upset'],['🤝','मुझे समर्थन चाहिए','I need support']
+],
+health:[
+ ['💊','दवा के बारे में पूछना है','I have a question about my medicine'],['👨‍⚕️','मुझे डॉक्टर से बात करनी है','I need to speak to a doctor'],
+ ['🩹','मुझे चोट लगी है','I am injured'],['🤕','मेरे सिर में दर्द है','I have a headache'],['😮‍💨','साँस लेने में परेशानी है','I am having trouble breathing'],
+ ['🤒','मुझे बुखार है','I have a fever'],['🩺','मुझे जाँच चाहिए','I need an examination'],['👂','मुझे सुनने में कठिनाई है','I have difficulty hearing'],
+ ['🗣️','बोलने में कठिनाई है','I have difficulty speaking'],['🚑','मुझे तुरंत चिकित्सा मदद चाहिए','I need urgent medical help'],
+ ['📍','दर्द यहाँ है','The pain is here'],['📈','दर्द बहुत तेज़ है','The pain is severe'],['📉','दर्द हल्का है','The pain is mild'],
+ ['💬','मुझे अपने विकल्प समझाएँ','Please explain my options'],['✋','कृपया पहले अनुमति लें','Please ask for my consent first'],
+ ['⏸️','मुझे थोड़ा आराम चाहिए','I need a short break'],['📅','मेरी अगली अपॉइंटमेंट कब है?','When is my next appointment?']
+],
+places:[
+ ['🏥','अस्पताल जाना है','I need to go to hospital'],['🏠','घर चलें','Let us go home'],['🚗','गाड़ी चाहिए','I need a car'],
+ ['🛒','दुकान जाना है','I want to go to the shop'],['🌳','बाहर जाना है','I want to go outside'],['🚶','चलने में मदद करें','Please help me walk'],
+ ['🪑','बैठने की जगह चाहिए','I need somewhere to sit'],['🧭','हम कहाँ हैं?','Where are we?'],['🚪','दरवाज़ा खोलें','Open the door'],['🚌','बस चाहिए','I need the bus']
+],
+choices:[
+ ['✅','हाँ','Yes'],['❌','नहीं','No'],['🤷','पता नहीं','I do not know'],['👌','शायद','Maybe'],['⏸️','अभी नहीं','Not now'],
+ ['🔄','फिर से कोशिश करें','Try again'],['1️⃣','पहला विकल्प','First option'],['2️⃣','दूसरा विकल्प','Second option'],
+ ['⭐','मुझे यह पसंद है','I like this'],['🚫','मुझे यह पसंद नहीं','I do not like this'],['❓','कृपया समझाएँ','Please explain'],
+ ['🕒','बाद में','Later'],['🆕','कुछ और','Something else'],['✋','मैं सहमत नहीं हूँ','I disagree']
+],
+social:[
+ ['💬','मैं आपसे बात करना चाहता/चाहती हूँ','I want to talk with you'],['📰','मुझे खबरों पर बात करनी है','I want to talk about the news'],
+ ['📖','मैं अपनी कहानी बताना चाहता/चाहती हूँ','I want to tell my story'],['😂','यह मज़ेदार है','That is funny'],
+ ['🤔','मैं सोच रहा/रही हूँ','I am thinking'],['💭','मेरी राय अलग है','I have a different opinion'],
+ ['❤️','यह मेरे लिए महत्वपूर्ण है','This is important to me'],['🙅','मैं इस बारे में बात नहीं करना चाहता/चाहती','I do not want to talk about this'],
+ ['❓','आप मुझे और बताएँ','Tell me more'],['👂','मैं आपकी बात सुन रहा/रही हूँ','I am listening to you'],
+ ['🤝','मुझे आपकी मदद चाहिए','I need your help'],['✅','मैं सहमत हूँ','I agree']
+],
+personal:[]
 };
-const say=(hi,en)=>lang==='hi'?hi:en, setStatus=s=>$('status').textContent=s;
-function tile(item,fn){let b=document.createElement('button');b.className='tile';b.type='button';let e=document.createElement('span');e.className='emoji';e.textContent=item[0];let t=document.createElement('span');t.textContent=item[lang==='hi'?1:2];let o=document.createElement('small');o.textContent=item[lang==='hi'?2:1];b.append(e,t,o);b.onclick=()=>fn(item);return b}
-function renderUrgent(){$('urgentGrid').replaceChildren(...urgent.map(x=>tile(x,choose)))}
-function renderCats(){$('categories').replaceChildren(...cats.map(c=>tile([c[1],c[2],c[3]],()=>{category=c[0];page=0;renderItems()})))}
-function renderItems(){let c=cats.find(c=>c[0]===category);$('itemsTitle').textContent=c[lang==='hi'?2:3]+' / '+c[lang==='hi'?3:2];let list=data[category]||[];let shown=list.slice(page*8,page*8+8);$('items').replaceChildren(...shown.map(x=>tile(x,choose)));$('prev').disabled=page===0;$('next').disabled=(page+1)*8>=list.length}
-function choose(item){if(mode==='basic'){let m=item[lang==='hi'?1:2];$('message').value=m;speak(m)}else{phrase.push(item);renderPhrase();$('message').value=phrase.map(x=>x[lang==='hi'?1:2]).join(' ')}}
-function renderPhrase(){$('phrase').replaceChildren(...phrase.map((x,i)=>{let c=document.createElement('span');c.className='chip';let s=document.createElement('span');s.textContent=x[lang==='hi'?1:2];let b=document.createElement('button');b.textContent='×';b.setAttribute('aria-label','Remove word');b.onclick=()=>{phrase.splice(i,1);renderPhrase();$('message').value=phrase.map(y=>y[lang==='hi'?1:2]).join(' ')};c.append(s,b);return c}))}
-function speak(text){if(!text.trim()){setStatus(say('पहले संदेश चुनें या लिखें।','Choose a card or type a message first.'));return}if(!('speechSynthesis'in window)){setStatus('Speech synthesis is not supported in this browser.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.rate=+$('rate').value;let v=voices.find(v=>v.name===$('voice').value)||voices.find(v=>v.lang.toLowerCase().startsWith(lang==='hi'?'hi':'en'));if(v){u.voice=v;u.lang=v.lang}else u.lang=lang==='hi'?'hi-IN':'en-IN';u.onstart=()=>setStatus(say('बोल रहा है…','Speaking…'));u.onend=()=>setStatus(say('तैयार।','Ready.'));u.onerror=()=>setStatus(say('आवाज़ शुरू नहीं हो सकी। डिवाइस की आवाज़ सेटिंग जाँचें।','Speech failed. Check device voice settings.'));speechSynthesis.speak(u)}
-function loadSaved(){try{return JSON.parse(localStorage.getItem('hearlinkAacSaved')||'[]')}catch(e){return []}}
-function renderSaved(){let arr=loadSaved(),grid=$('saved');grid.replaceChildren();if(!arr.length){let p=document.createElement('p');p.className='muted';p.textContent=say('अभी कोई संदेश सहेजा नहीं गया।','No saved messages yet.');grid.append(p);return}arr.forEach((x,i)=>{let wrap=document.createElement('div');let b=tile(['⭐',x.name,x.name],()=>{$('message').value=x.message;speak(x.message)});let d=document.createElement('button');d.className='btn danger';d.textContent=say('हटाएँ','Delete');d.onclick=()=>{arr.splice(i,1);localStorage.setItem('hearlinkAacSaved',JSON.stringify(arr));renderSaved()};wrap.append(b,d);grid.append(wrap)})}
-function refreshVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices();let old=$('voice').value,sel=$('voice');sel.replaceChildren(new Option(say('डिवाइस की डिफ़ॉल्ट आवाज़','System default'),''));voices.forEach(v=>sel.add(new Option(`${v.name} (${v.lang})`,v.name)));if(voices.some(v=>v.name===old))sel.value=old}
-function setMode(m){mode=m;$('basic').classList.toggle('active',m==='basic');$('advanced').classList.toggle('active',m==='advanced');$('phraseArea').classList.toggle('hidden',m!=='advanced');$('modeHint').textContent=m==='basic'?say('सरल मोड: कार्ड दबाते ही बोलेगा।','Basic: tap a card to speak immediately.'):say('कार्ड दबाकर संदेश बनाएँ, फिर पूरा संदेश बोलें।','Tap cards to build a message, then speak it.');phrase=[];renderPhrase()}
-function setLang(l){lang=l;document.documentElement.lang=l;$('subtitle').textContent=say('वयस्क अफ़ेसिया • संदर्भ के अनुसार बातचीत','Adult aphasia • Context-based communication');$('urgentTitle').textContent=say('ज़रूरी / दर्द • Urgent & Pain','Urgent & Pain • ज़रूरी / दर्द');$('categoryTitle').textContent=say('मुझे किस बारे में बात करनी है? / Choose a situation','Choose a situation / मुझे किस बारे में बात करनी है?');$('messageTitle').textContent=say('मेरा संदेश / My message','My message / मेरा संदेश');$('help').textContent=say('कार्ड दबाएँ। बातचीत मोड में कार्ड संदेश में जुड़ेंगे।','Tap a card to speak. Conversation mode adds cards to your message.');$('speakText').textContent=say('🔊 बोलें / Speak','🔊 Speak / बोलें');$('addText').textContent=say('वाक्य में जोड़ें / Add to message','Add to message / वाक्य में जोड़ें');$('stop').textContent=say('■ रोकें / Stop','■ Stop / रोकें');$('speakPhrase').textContent=say('🔊 पूरा संदेश बोलें','🔊 Speak message');$('undo').textContent=say('एक शब्द हटाएँ','Undo word');$('clear').textContent=say('साफ़ करें','Clear');$('settingsTitle').textContent=say('आवाज़ और पसंद / Voice & preferences','Voice & preferences / आवाज़ और पसंद');$('save').textContent=say('★ संदेश सहेजें / Save','★ Save / संदेश सहेजें');$('savedTitle').textContent=say('मेरे सहेजे संदेश / Saved messages','Saved messages / मेरे सहेजे संदेश');renderUrgent();renderCats();renderItems();renderPhrase();renderSaved();refreshVoices()}
-$('basic').onclick=()=>setMode('basic');$('advanced').onclick=()=>setMode('advanced');$('lang').onclick=()=>setLang(lang==='hi'?'en':'hi');$('prev').onclick=()=>{page=Math.max(0,page-1);renderItems()};$('next').onclick=()=>{page++;renderItems()};
-$('speakText').onclick=()=>speak($('message').value);$('speakPhrase').onclick=()=>speak(phrase.map(x=>x[lang==='hi'?1:2]).join(' ')||$('message').value);$('undo').onclick=()=>{phrase.pop();renderPhrase();$('message').value=phrase.map(x=>x[lang==='hi'?1:2]).join(' ')};$('clear').onclick=()=>{phrase=[];renderPhrase();$('message').value='';setStatus(say('संदेश साफ़ किया गया।','Message cleared.'))};
-$('addText').onclick=()=>{let v=$('message').value.trim();if(!v)return;if(mode!=='advanced')setMode('advanced');phrase.push(['✍️',v,v]);renderPhrase();setStatus(say('संदेश में जोड़ा गया।','Added to message.'))};$('stop').onclick=()=>{if('speechSynthesis'in window)speechSynthesis.cancel();setStatus(say('बोलना रोक दिया गया।','Speech stopped.'))};
-$('save').onclick=()=>{let message=$('message').value.trim();if(!message){setStatus(say('पहले संदेश लिखें या चुनें।','Type or select a message first.'));return}let arr=loadSaved();arr.push({name:$('saveName').value.trim()||message.slice(0,24),message});localStorage.setItem('hearlinkAacSaved',JSON.stringify(arr));$('saveName').value='';renderSaved();setStatus(say('इस डिवाइस पर संदेश सहेजा गया।','Saved on this device.'))};
-if('speechSynthesis'in window)speechSynthesis.onvoiceschanged=refreshVoices;setLang('hi');setMode('basic');refreshVoices();
+
+const starters=[
+ ['💬','मैं कहना चाहता/चाहती हूँ…','I want to say…','prefix'],
+ ['🙏','कृपया…','Please…','prefix'],
+ ['❓','मुझे जानना है…','I want to know…','prefix'],
+ ['💭','मुझे लगता है…','I think…','prefix'],
+ ['🧠','मुझे याद है…','I remember…','prefix'],
+ ['📖','मेरी कहानी में…','In my story…','prefix'],
+ ['✋','मैं नहीं चाहता/चाहती…','I do not want…','prefix'],
+ ['✅','मैं चाहता/चाहती हूँ…','I want…','prefix']
+];
+const connectors=[
+ ['➕','और','and','word'],['↔️','लेकिन','but','word'],['कारण','क्योंकि','because','word'],
+ ['🕒','बाद में','later','word'],['📍','यहाँ','here','word'],['👤','वह व्यक्ति','that person','word'],
+ ['❓','कौन?','who?','word'],['❓','कहाँ?','where?','word'],['❓','कब?','when?','word'],
+ ['❓','क्यों?','why?','word'],['❓','कैसे?','how?','word'],['✍️','मुझे लिखने दें','Let me write it','word']
+];
+const say=(hi,en)=>lang==='hi'?hi:en;
+const setStatus=s=>{$('status').textContent=s};
+function safeRead(key,fallback){try{const v=JSON.parse(localStorage.getItem(key)||'null');return v===null?fallback:v}catch{return fallback}}
+function safeWrite(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{setStatus(say('सहेजना संभव नहीं हुआ। डिवाइस में जगह जाँचें।','Could not save. Check device storage.'));return false}}
+function getPersonal(){return safeRead(STORAGE.personal,[])}
+function getProfile(){return safeRead(STORAGE.profile,{startMode:'quick',buttonSize:'regular',largeText:false})}
+function getSaved(){return safeRead(STORAGE.saved,[])}
+function cardButton(item,onActivate,subLabel=''){
+ const b=document.createElement('button');b.className='tile';b.type='button';
+ const e=document.createElement('span');e.className='emoji';e.textContent=item[0]||'💬';
+ const t=document.createElement('span');t.textContent=item[lang==='hi'?1:2]||item.label||'';
+ const small=document.createElement('small');small.textContent=subLabel||item[lang==='hi'?2:1]||'';
+ b.append(e,t,small);b.onclick=()=>onActivate(item);return b;
+}
+function speak(text){
+ if(!String(text||'').trim()){setStatus(say('पहले संदेश चुनें या लिखें।','Choose a card or type a message first.'));return}
+ if(!('speechSynthesis'in window)){setStatus(say('इस ब्राउज़र में बोलने की सुविधा उपलब्ध नहीं है।','Speech synthesis is not available in this browser.'));return}
+ window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(String(text));
+ utterance.rate=Number($('rate').value);const selected=voices.find(v=>v.name===$('voice').value);
+ const voice=selected||voices.find(v=>v.lang.toLowerCase().startsWith(lang==='hi'?'hi':'en'));
+ if(voice){utterance.voice=voice;utterance.lang=voice.lang}else utterance.lang=lang==='hi'?'hi-IN':'en-IN';
+ utterance.onstart=()=>setStatus(say('बोल रहा है…','Speaking…'));
+ utterance.onend=()=>setStatus(say('तैयार।','Ready.'));
+ utterance.onerror=()=>setStatus(say('आवाज़ शुरू नहीं हो सकी। डिवाइस की आवाज़ जाँचें।','Speech failed. Check device voice settings.'));
+ window.speechSynthesis.speak(utterance);
+}
+function selectedText(item){return item.message||item[lang==='hi'?1:2]||''}
+function activateItem(item){
+ const text=selectedText(item);
+ if(mode==='quick'){$('message').value=text;speak(text);return}
+ phrase.push({emoji:item[0]||'💬',hi:item[1]||item.label||text,en:item[2]||text,kind:'phrase'});renderPhrase();syncBuilderToText();
+}
+function makeChip(item,index){
+ const c=document.createElement('span');c.className='chip';const s=document.createElement('span');s.textContent=lang==='hi'?item.hi:item.en;
+ const b=document.createElement('button');b.type='button';b.textContent='×';b.setAttribute('aria-label',say('इस हिस्से को हटाएँ','Remove this part'));
+ b.onclick=()=>{phrase.splice(index,1);renderPhrase();syncBuilderToText()};c.append(s,b);return c;
+}
+function renderPhrase(){$('phrase').replaceChildren(...phrase.map(makeChip))}
+function syncBuilderToText(){const built=phrase.map(x=>lang==='hi'?x.hi:x.en).join(' ');$('message').value=built}
+function addBuilderToken(item){
+ phrase.push({emoji:item[0]||'💬',hi:item[1],en:item[2],kind:item[3]||'word'});
+ renderPhrase();syncBuilderToText();
+}
+function renderBuilderButtons(){
+ $('starters').replaceChildren(...starters.map(x=>cardButton([x[0],x[lang==='hi'?1:2],x[lang==='hi'?2:1]],()=>addBuilderToken(x))));
+ $('connectors').replaceChildren(...connectors.map(x=>cardButton([x[0],x[lang==='hi'?1:2],x[lang==='hi'?2:1]],()=>addBuilderToken(x))));
+}
+function renderUrgent(){$('urgentGrid').replaceChildren(...urgent.map(item=>cardButton(item,activateItem)))}
+function renderCategories(){
+ $('categories').replaceChildren(...cats.map(c=>cardButton([c[1],c[2],c[3]],()=>{
+ category=c[0];page=0;renderItems();
+ })));
+}
+function renderItems(){
+ const c=cats.find(x=>x[0]===category);$('itemsTitle').textContent=lang==='hi'?c[2]+' / '+c[3]:c[3]+' / '+c[2];
+ const list=category==='personal'?getPersonal().map(p=>[p.emoji,p.hi,p.en,p.id,p.message]):(data[category]||[]);
+ const shown=list.slice(page*8,page*8+8);
+ $('items').replaceChildren(...shown.map(x=>cardButton(x,item=>{
+   if(category==='personal')activateItem({0:item[0],1:item[1],2:item[2],message:item[4],label:item[1]});
+   else activateItem({0:item[0],1:item[1],2:item[2]});
+ })));
+ $('prev').disabled=page===0;$('next').disabled=(page+1)*8>=list.length;
+ $('itemsHelp').textContent=mode==='quick'?say('कार्ड दबाने पर संदेश तुरंत बोलेगा।','Tap a card to speak the message immediately.'):say('कार्ड आपके संदेश में जुड़ता है। पूरा संदेश जाँचकर बोलें।','Cards add to your message. Review it before speaking.');
+}
+function renderSaved(){
+ const grid=$('saved'),arr=getSaved();grid.replaceChildren();
+ if(!arr.length){const p=document.createElement('p');p.className='muted';p.textContent=say('अभी कोई संदेश सहेजा नहीं गया।','No saved messages yet.');grid.append(p);return}
+ for(const [i,x] of arr.entries()){
+  const wrap=document.createElement('div');wrap.className='saved-wrap';
+  wrap.append(cardButton(['⭐',x.name,x.message],()=>{$('message').value=x.message;speak(x.message)}));
+  const actions=document.createElement('div');actions.className='saved-actions';
+  const edit=document.createElement('button');edit.className='btn';edit.textContent=say('संपादित करें','Edit');edit.onclick=()=>{$('saveName').value=x.name;$('message').value=x.message;$('message').focus()};
+  const del=document.createElement('button');del.className='btn danger';del.textContent=say('हटाएँ','Delete');del.onclick=()=>{arr.splice(i,1);if(safeWrite(STORAGE.saved,arr))renderSaved()};
+  actions.append(edit,del);wrap.append(actions);grid.append(wrap);
+ }
+}
+function renderPersonalCards(){
+ const grid=$('personalCards'),arr=getPersonal();grid.replaceChildren();
+ if(!arr.length){const p=document.createElement('p');p.className='muted';p.textContent=say('अपने काम के शब्द/संदेश यहाँ जोड़ें।','Add personally meaningful words and messages here.');grid.append(p);return}
+ arr.forEach((x,i)=>{const wrap=document.createElement('div');wrap.className='saved-wrap';wrap.append(cardButton([x.emoji,x.hi,x.en],()=>activateItem({0:x.emoji,1:x.hi,2:x.en,message:x.message})));const d=document.createElement('button');d.className='btn danger';d.textContent=say('कार्ड हटाएँ','Remove card');d.onclick=()=>{arr.splice(i,1);if(safeWrite(STORAGE.personal,arr)){renderPersonalCards();if(category==='personal')renderItems()}};wrap.append(d);grid.append(wrap)});
+}
+function refreshVoices(){
+ if(!('speechSynthesis'in window))return;const old=$('voice').value;voices=window.speechSynthesis.getVoices();const sel=$('voice');
+ sel.replaceChildren(new Option(say('डिवाइस की डिफ़ॉल्ट आवाज़','System default'),''));
+ voices.forEach(v=>sel.add(new Option(v.name+' ('+v.lang+')',v.name)));
+ if(voices.some(v=>v.name===old))sel.value=old;
+}
+function setMode(next,remember=true){
+ mode=next==='build'?'build':'quick';$('quickMode').classList.toggle('active',mode==='quick');$('conversationMode').classList.toggle('active',mode==='build');
+ $('builder').classList.toggle('hidden',mode!=='build');$('builderHelp').classList.toggle('hidden',mode!=='build');
+ $('modeHint').textContent=mode==='quick'?say('कार्ड दबाते ही बोलें','Tap a card to speak'):say('बनाएँ • जाँचें • बोलें','Build • Review • Speak');
+ $('modeDescription').textContent=mode==='quick'?say('त्वरित मोड: तैयार संदेश एक टैप में बोलेगा।','Quick mode: a ready-made message speaks with one tap.'):say('बातचीत मोड: वाक्य-शुरुआत और शब्द चुनें, फिर संपादित करके संदेश बोलें।','Conversation mode: choose starters and words, edit the message, then speak.');
+ if(mode==='quick')phrase=[];renderPhrase();renderItems();
+ if(remember){const p=getProfile();p.startMode=mode;safeWrite(STORAGE.profile,p)}
+}
+function applyButtonSize(value){
+ document.body.style.fontSize=value==='xlarge'?'22px':value==='large'?'20px':'18px';
+ document.querySelectorAll('.tile').forEach(el=>el.style.minHeight=value==='xlarge'?'132px':value==='large'?'116px':'100px');
+}
+function openSettings(open){$('profilePanel').classList.toggle('hidden',!open);if(open){const p=getProfile();$('startMode').value=p.startMode||'quick';$('buttonSize').value=p.buttonSize||'regular';$('largeTextToggle').classList.toggle('active',!!p.largeText);$('personalCards').scrollIntoView({behavior:'smooth',block:'nearest'});$('profilePanel').scrollIntoView({behavior:'smooth',block:'start'})}}
+function toggleLargeText(){
+ largeText=!largeText;document.body.style.fontSize=largeText?'21px':'18px';$('largeTextToggle').classList.toggle('active',largeText);
+ const p=getProfile();p.largeText=largeText;safeWrite(STORAGE.profile,p);
+}
+function setLang(next){
+ lang=next;document.documentElement.lang=lang;
+ const labels={
+ subtitle:['वयस्क अफ़ेसिया • संवाद के लिए सहायक','Adult aphasia • Communication support'],
+ urgentTitle:['ज़रूरी संदेश / Essential messages','Essential messages / ज़रूरी संदेश'],
+ urgentNote:['हमेशा उपलब्ध • Always available','Always available • हमेशा उपलब्ध'],
+ welcomeTitle:['आज आप क्या कहना चाहेंगे?','What would you like to say today?'],
+ pathHint:['अपनी सुविधा के अनुसार मोड चुनें','Choose the support that suits you'],
+ categoryTitle:['विषय चुनें / Choose a topic','Choose a topic / विषय चुनें'],
+ messageTitle:['मेरा संदेश / My message','My message / मेरा संदेश'],
+ starterTitle:['वाक्य शुरू करें / Start with','Start with / वाक्य शुरू करें'],
+ connectTitle:['जोड़ने वाले शब्द / Add meaning','Add meaning / जोड़ने वाले शब्द'],
+ saveNameLabel:['संदेश का नाम / Message label','Message label / संदेश का नाम'],
+ savedTitle:['सहेजे हुए व्यक्तिगत संदेश / Personal saved messages','Personal saved messages / सहेजे हुए संदेश'],
+ savedNote:['सहेजे संदेश केवल इसी डिवाइस के ब्राउज़र में रहेंगे।','Saved messages stay in this browser on this device.'],
+ profileTitle:['व्यक्तिगत सेटिंग / Personal profile','Personal profile / व्यक्तिगत सेटिंग'],
+ profileIntro:['इन्हें व्यक्ति और उसके परिवार/स्पीच-लैंग्वेज थेरपिस्ट के साथ मिलकर चुनें।','Choose these with the person and, if appropriate, their family or speech-language therapist.'],
+ personalVocabTitle:['अपने व्यक्तिगत कार्ड जोड़ें / Add personal cards','Add personal cards / अपने व्यक्तिगत कार्ड जोड़ें'],
+ profilePrivacy:['प्रोफ़ाइल और कार्ड इसी डिवाइस पर सहेजे जाते हैं। निजी जानकारी साझा न करें।','Profile and cards are stored on this device. Avoid entering sensitive personal information.'],
+ safetyText:['यह संचार में मदद करने वाला प्रोटोटाइप है, निदान या उपचार का विकल्प नहीं। यह आपातकालीन सेवा या परिवार को अपने-आप फोन नहीं करता। आपातकाल के लिए दूसरा तरीका भी रखें।','This is a communication aid prototype, not a diagnostic or treatment tool. It does not call emergency services or caregivers. Keep another way to request urgent help.'],
+ clinicalNote:['शब्दावली और प्रतीकों को हर व्यक्ति के लिए जाँचें। clinical effectiveness का दावा उचित user testing और मूल्यांकन से पहले न करें।','Vocabulary and symbols should be checked with each person. Do not claim clinical effectiveness before appropriate user testing and evaluation.']
+ };
+ for(const [id,vals] of Object.entries(labels))$(id).textContent=vals[lang==='hi'?0:1];
+ $('quickMode').textContent=say('त्वरित संदेश / Quick','Quick messages / त्वरित संदेश');
+ $('conversationMode').textContent=say('बातचीत बनाएँ / Build','Conversation builder / बातचीत बनाएँ');
+ $('languageToggle').textContent=say('हिंदी / English','English / हिंदी');
+ $('openSettings').textContent=say('⚙ पसंद / Profile','⚙ Profile / पसंद');
+ $('largeTextToggle').textContent=say('A+ बड़ा पाठ / Larger text','A+ Larger text / बड़ा पाठ');
+ $('clearMessageTop').textContent=say('संदेश साफ़ करें / Clear message','Clear message / संदेश साफ़ करें');
+ $('modeDescription').textContent=mode==='quick'?say('त्वरित मोड: तैयार संदेश एक टैप में बोलेगा।','Quick mode: ready-made messages speak with one tap.'):say('बातचीत मोड: वाक्य-शुरुआत और शब्द चुनें, फिर संपादित करके बोलें।','Conversation mode: choose starters and words, then edit before speaking.');
+ $('messageLabel').childNodes[0].textContent=say('संदेश संपादित करें / Edit message','Edit message / संदेश संपादित करें');
+ $('message').placeholder=say('अपना संदेश यहाँ लिखें…','Type or edit your message here…');
+ $('speakText').textContent=say('🔊 बोलें / Speak message','🔊 Speak message / बोलें');
+ $('addText').textContent=say('वाक्य में जोड़ें / Add typed text','Add typed text / वाक्य में जोड़ें');
+ $('stop').textContent=say('■ रोकें / Stop speech','■ Stop speech / रोकें');
+ $('undo').textContent=say('आख़िरी हिस्सा हटाएँ / Undo','Undo / आख़िरी हिस्सा हटाएँ');
+ $('clearBuilder').textContent=say('सब हटाएँ / Clear all','Clear all / सब हटाएँ');
+ $('save').textContent=say('★ संदेश सहेजें / Save message','★ Save message / संदेश सहेजें');
+ $('closeSettings').textContent=say('बंद करें / Close','Close / बंद करें');
+ $('addPersonal').textContent=say('+ कार्ड जोड़ें / Add card','+ Add card / कार्ड जोड़ें');
+ $('personalLabelLabel').childNodes[0].textContent=say('कार्ड पर लिखा नाम / Card label','Card label / कार्ड पर लिखा नाम');
+ $('personalMessageLabel').childNodes[0].textContent=say('पूरा संदेश / Message spoken','Message spoken / पूरा संदेश');
+ $('personalEmojiLabel').childNodes[0].textContent=say('प्रतीक / Emoji (optional)','Emoji (optional) / प्रतीक');
+ $('voiceLabel').childNodes[0].textContent=say('आवाज़ / Speech voice','Speech voice / आवाज़');
+ $('rateLabel').childNodes[0].textContent=say('बोलने की गति / Speech rate','Speech rate / बोलने की गति');
+ $('startModeLabel').childNodes[0].textContent=say('ऐप खुलते समय / Default mode','Default mode / ऐप खुलते समय');
+ $('displayLabel').childNodes[0].textContent=say('कार्डों का आकार / Button size','Button size / कार्डों का आकार');
+ $('startMode').options[0].text=say('त्वरित संदेश','Quick messages');$('startMode').options[1].text=say('बातचीत बनाएँ','Conversation builder');
+ $('buttonSize').options[0].text=say('सामान्य','Regular');$('buttonSize').options[1].text=say('बड़ा','Large');$('buttonSize').options[2].text=say('बहुत बड़ा','Extra large');
+ $('personalLabel').placeholder=say('जैसे: मेरी बेटी','e.g. My daughter');$('personalMessage').placeholder=say('जैसे: कृपया रिया को फोन करें','e.g. Please call Riya');
+ renderUrgent();renderCategories();renderItems();renderBuilderButtons();renderPhrase();renderSaved();renderPersonalCards();refreshVoices();
+}
+$('quickMode').onclick=()=>setMode('quick');$('conversationMode').onclick=()=>setMode('build');$('languageToggle').onclick=()=>setLang(lang==='hi'?'en':'hi');
+$('prev').onclick=()=>{page=Math.max(0,page-1);renderItems()};$('next').onclick=()=>{page++;renderItems()};
+$('speakText').onclick=()=>speak($('message').value);
+$('undo').onclick=()=>{phrase.pop();renderPhrase();syncBuilderToText()};
+$('clearBuilder').onclick=()=>{phrase=[];renderPhrase();$('message').value='';setStatus(say('संदेश साफ़ किया गया।','Message cleared.'))};
+$('clearMessageTop').onclick=()=>{$('message').value='';phrase=[];renderPhrase();setStatus(say('संदेश साफ़ किया गया।','Message cleared.'))};
+$('addText').onclick=()=>{
+ const value=$('message').value.trim();if(!value){setStatus(say('पहले संदेश लिखें।','Type a message first.'));return}
+ if(mode!=='build'){setMode('build')}
+ const last=phrase.map(x=>lang==='hi'?x.hi:x.en).join(' ');
+ if(value!==last){phrase.push({emoji:'✍️',hi:value,en:value,kind:'typed'});renderPhrase()}
+ $('message').value=phrase.map(x=>lang==='hi'?x.hi:x.en).join(' ');
+ setStatus(say('लिखा हुआ संदेश बातचीत में जोड़ा गया।','Typed text added to the message builder.'));
+};
+$('stop').onclick=()=>{if('speechSynthesis'in window)window.speechSynthesis.cancel();setStatus(say('बोलना रोक दिया गया।','Speech stopped.'))};
+$('save').onclick=()=>{
+ const message=$('message').value.trim();if(!message){setStatus(say('पहले संदेश चुनें या लिखें।','Choose or type a message first.'));return}
+ const arr=getSaved();arr.push({id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7),name:$('saveName').value.trim()||message.slice(0,30),message});
+ if(safeWrite(STORAGE.saved,arr)){$('saveName').value='';renderSaved();setStatus(say('इस डिवाइस पर संदेश सहेजा गया।','Saved on this device.'))}
+};
+$('openSettings').onclick=()=>openSettings(true);$('closeSettings').onclick=()=>openSettings(false);
+$('largeTextToggle').onclick=toggleLargeText;
+$('startMode').onchange=()=>{const p=getProfile();p.startMode=$('startMode').value;safeWrite(STORAGE.profile,p);setMode(p.startMode,false)};
+$('buttonSize').onchange=()=>{const p=getProfile();p.buttonSize=$('buttonSize').value;safeWrite(STORAGE.profile,p);applyButtonSize(p.buttonSize)};
+$('addPersonal').onclick=()=>{
+ const hi=$('personalLabel').value.trim(),message=$('personalMessage').value.trim(),emoji=$('personalEmoji').value.trim()||'💬';
+ if(!hi||!message){setStatus(say('कार्ड का नाम और संदेश दोनों लिखें।','Enter both a card label and its spoken message.'));return}
+ const arr=getPersonal();arr.push({id:Date.now().toString(36),emoji,hi,en:hi,message});
+ if(safeWrite(STORAGE.personal,arr)){$('personalLabel').value='';$('personalMessage').value='';$('personalEmoji').value='';renderPersonalCards();if(category==='personal')renderItems();setStatus(say('व्यक्तिगत कार्ड जोड़ा गया।','Personal card added.'))}
+};
+if('speechSynthesis'in window)window.speechSynthesis.onvoiceschanged=refreshVoices;
+setLang('hi');
+const initial=getProfile();largeText=!!initial.largeText;$('largeTextToggle').classList.toggle('active',largeText);if(largeText)document.body.style.fontSize='21px';
+$('startMode').value=initial.startMode||'quick';$('buttonSize').value=initial.buttonSize||'regular';applyButtonSize($('buttonSize').value);setMode(initial.startMode||'quick',false);
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
-</script></body></html>
+</script>
+</body>
+</html>
